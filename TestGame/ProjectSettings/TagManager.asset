@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CameraMap
+  - CameraButtons
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: CameraMap
+    uniqueID: 3937017675
+    locked: 0
+  - name: CameraButtons
+    uniqueID: 1642525947
     locked: 0

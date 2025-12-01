@@ -6,9 +6,9 @@ public class LightController : MonoBehaviour
 {
     [SerializeField] private DoorMechanics Door;
 
-    private void OnMouseDown ()
+    private void OnMouseDown()
     {
         Door.ChangeLights();
-        Door.GetComponent<AudioSource>().Play();
+        
     }
 }
