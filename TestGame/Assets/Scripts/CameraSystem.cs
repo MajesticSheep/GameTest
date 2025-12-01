@@ -21,6 +21,8 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private GameObject CameraSystemUI;
     [SerializeField] private GameObject CameraMapUI;
 
+    [SerializeField] private PowerSystem Power;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,46 +39,65 @@ public class CameraSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(OpenCameras))
+        if(Power.Power > 0f)
         {
-            CamerasOpen = !CamerasOpen;
-            ShowCamera();
-        }
+            if (Input.GetKeyDown(OpenCameras))
+            {
+                CamerasOpen = !CamerasOpen;
 
-        if(CoolDownTimer <= 0)
-        {
-           if(Input.GetAxis("Horizontal") > 0)
-           {
-               Cameras[CurrentCam].SetActive(false);
-               CurrentCam = CurrentCam + 1;
+                if (CamerasOpen)
+                {
+                    Power.SystemsOn += 1;
+                }
+                else
+                {
+                    Power.SystemsOn -= 1;
+                }
 
-               if(CurrentCam >= Cameras.Length)
-               {
-                   CurrentCam = 0;
-               }
+                ShowCamera();
+            }
 
-               GoToCamera(CurrentCam);
-               CoolDownTimer = CoolDownTime;
-           }
-           else if (Input.GetAxis("Horizontal") < 0)
-           {
-               Cameras[CurrentCam].SetActive(false);
-               CurrentCam = CurrentCam - 1;
+            if (CoolDownTimer <= 0)
+            {
+                if (Input.GetAxis("Horizontal") > 0)
+                {
+                    Cameras[CurrentCam].SetActive(false);
+                    CurrentCam = CurrentCam + 1;
 
-               if (CurrentCam < 0)
-               {
-                   CurrentCam = Cameras.Length - 1;
-               }
+                    if (CurrentCam >= Cameras.Length)
+                    {
+                        CurrentCam = 0;
+                    }
 
-               GoToCamera(CurrentCam);
-               CoolDownTimer = CoolDownTime;
+                    GoToCamera(CurrentCam);
+                    CoolDownTimer = CoolDownTime;
+                }
+                else if (Input.GetAxis("Horizontal") < 0)
+                {
+                    Cameras[CurrentCam].SetActive(false);
+                    CurrentCam = CurrentCam - 1;
+
+                    if (CurrentCam < 0)
+                    {
+                        CurrentCam = Cameras.Length - 1;
+                    }
+
+                    GoToCamera(CurrentCam);
+                    CoolDownTimer = CoolDownTime;
+                }
+            }
+
+            else
+            {
+                CoolDownTimer -= Time.deltaTime;
             }
         }
-
         else
         {
-            CoolDownTimer -= Time.deltaTime;
+            CamerasOpen = false;
+            ShowCamera();
         }
+        
     }
 
     private void ShowCamera()
@@ -87,13 +108,14 @@ public class CameraSystem : MonoBehaviour
             CameraMapUI.SetActive(true);
             CameraSystemUI.SetActive(true);
             Cameras[CurrentCam].SetActive(true);
+
         }
         else
         {
+            MainCamera.SetActive(true);
             Cameras[CurrentCam].SetActive(false);
             CameraMapUI.SetActive(false);
             CameraSystemUI.SetActive(false);
-            MainCamera.SetActive(true);
         }
     }
 
