@@ -17,6 +17,8 @@ public class ShiftTimer : MonoBehaviour
     [SerializeField] private GameObject WinScreen;
 
     [SerializeField] private bool Won;
+
+    [SerializeField] private AnimatronicSystem[] Animatronics;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,14 @@ public class ShiftTimer : MonoBehaviour
 
             var hours = Mathf.FloorToInt(Timer / 60);
             var minutes = Mathf.FloorToInt(Timer - hours * 60);
+
+            if(minutes == 0)
+            {
+                for (int i = 0; i < Animatronics.Length; i++)
+                {
+                    Animatronics[i].ChangeAggrssionByHour(hours);
+                }
+            }
 
             if (hours >= 6)
             {

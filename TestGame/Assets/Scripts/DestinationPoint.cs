@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class DestinationPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int[] points;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public bool IsDoor;
+    public bool IsOffice;
+
+    public DoorMechanics Door;
 }
