@@ -17,6 +17,7 @@ public class DoorMechanics : MonoBehaviour
 
     [SerializeField] private PowerSystem Power;
 
+
     // Start is called before the first frame update
     void Start()
     {
