@@ -23,6 +23,11 @@ public class SettingsMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     private void Update()
     {
         if(SceneManager.GetActiveScene().name != "WinScreen")

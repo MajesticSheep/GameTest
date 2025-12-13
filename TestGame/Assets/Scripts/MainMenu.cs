@@ -14,12 +14,12 @@ public class MainMenu : MonoBehaviour
         //I need to add a transition between scenes from the newspaper to Night 1
         //When making map, put lighting so the place isnt so dark when playing the game
         PlayerPrefs.DeleteAll();
-        SceneManager.LoadScene("Night1");
+        SceneManager.LoadScene("NewspaperStart");
     }
 
     public void Continue()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetString("CurrentNight", "Night1"));
+        SceneManager.LoadScene(PlayerPrefs.GetString("CurrentNight", "Night 1"));
     }
 
     public void QuitGame()
@@ -29,12 +29,12 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPrefs.GetString("CurrentNight", "Night1") == "Night1")
+        if(PlayerPrefs.GetString("CurrentNight", "Night 1") == "Night 1")
         {
             ContinueButton.SetActive(false);
             
         }
 
-        nightDisplay.text = PlayerPrefs.GetString("CurrentNight", "Night1");
+        nightDisplay.text = PlayerPrefs.GetString("CurrentNight", "Night 1");
     }
 }
